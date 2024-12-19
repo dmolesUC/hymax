@@ -1,0 +1,60 @@
+# Requires Docker Compose v2
+name: hymax
+services:
+  solr:
+    image: solr:8.11
+    ports:
+      - "8988:8983"
+    command:
+      - sh
+      - "-c"
+      - "precreate-core hyrax-test /opt/solr/server/configsets/hyraxconf; solr-precreate hyrax-dev /opt/solr/server/configsets/hyraxconf"
+    volumes:
+      - solr_home:/var/solr/data:cached
+      - ./solr/conf:/opt/solr/server/configsets/hyraxconf
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 524288
+    networks:
+      - hymax
+
+  postgres:
+    image: postgres:15
+    env_file:
+      - .env
+    ports:
+      - "5437:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - hymax
+
+  redis:
+    image: bitnami/redis:6.2
+    env_file:
+      - .env
+    ports:
+      - "6384:6379"
+    volumes:
+      - redis:/bitnami/redis/data
+    networks:
+      - hymax
+
+  fits:
+    image: ghcr.io/samvera/fitsservlet:1.6.0
+    ports:
+      - "8085:8080"
+    networks:
+      - hymax
+
+volumes:
+  db:
+  redis:
+  solr_home:
+
+networks:
+  hymax:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-hymax
