@@ -29,18 +29,6 @@ Valkyrie::MetadataAdapter.register(
   :pg_metadata
 )
 
-# Fedora metadata adapter
-# Valkyrie::MetadataAdapter.register(
-#   Valkyrie::Persistence::Fedora::MetadataAdapter.new(
-#     connection: ::Ldp::Client.new(Hyrax.config.fedora_connection_builder.call(
-#       ENV.fetch('FCREPO_URL') { "http://localhost:8080/fcrepo/rest" }
-#     )),
-#     base_path: Rails.env,
-#     schema: Valkyrie::Persistence::Fedora::PermissiveSchema.new(Hyrax::SimpleSchemaLoader.new.permissive_schema_for_valkrie_adapter),
-#     fedora_version: 6
-#   ), :fedora_metadata
-# )
-
 Valkyrie.config.metadata_adapter = ENV.fetch("VALKYRIE_METADATA_ADAPTER") { :pg_metadata }.to_sym
 
 # shrine_s3_options = {

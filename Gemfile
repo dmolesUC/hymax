@@ -68,7 +68,6 @@ gem "devise"
 gem "devise-guests", "~> 0.8"
 
 group :development, :test do
-  gem "fcrepo_wrapper"
   gem "rspec-rails"
 end
 gem "openseadragon", ">= 0.2.0"
