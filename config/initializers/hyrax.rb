@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Hyrax.config do |config|
   # Register roles that are expected by your implementation.
   # @see Hyrax::RoleRegistry for additional details.
@@ -95,7 +96,7 @@ Hyrax.config do |config|
 
   # Location autocomplete uses geonames to search for named regions
   # Username for connecting to geonames
-  config.geonames_username = ENV['GEONAMES_USERNAME'] || ''
+  config.geonames_username = ENV["GEONAMES_USERNAME"] || ""
 
   # Should the acceptance of the licence agreement be active (checkbox), or
   # implied when the save button is pressed? Set to true for active
@@ -139,7 +140,7 @@ Hyrax.config do |config|
   # Returns a URL that resolves to an info.json file provided by a IIIF image server
   config.iiif_info_url_builder = lambda do |file_id, base_url|
     uri = Riiif::Engine.routes.url_helpers.info_url(file_id, host: base_url)
-    uri.sub(%r{/info\.json\Z}, '')
+    uri.sub(%r{/info\.json\Z}, "")
   end
   # config.iiif_info_url_builder = lambda do |_, _|
   #   ""
@@ -243,12 +244,12 @@ Hyrax.config do |config|
   # Identify the model class name that will be used for Collections in your app
   # (i.e. ::Collection for ActiveFedora, Hyrax::PcdmCollection for Valkyrie)
   # config.collection_model = '::Collection'
-  config.collection_model = 'Hyrax::PcdmCollection'
+  config.collection_model = "Hyrax::PcdmCollection"
 
   # Identify the model class name that will be used for Admin Sets in your app
   # (i.e. AdminSet for ActiveFedora, Hyrax::AdministrativeSet for Valkyrie)
   # config.admin_set_model = 'AdminSet'
-  config.admin_set_model = 'Hyrax::AdministrativeSet'
+  config.admin_set_model = "Hyrax::AdministrativeSet"
 
   # Identify the form that will be used for Admin Sets
   # config.administrative_set_form = Hyrax::Forms::AdministrativeSetForm
@@ -341,6 +342,6 @@ end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
 
-Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
-Qa::Authorities::Local.register_subauthority('languages', 'Qa::Authorities::Local::TableBasedAuthority')
-Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')
+Qa::Authorities::Local.register_subauthority("subjects", "Qa::Authorities::Local::TableBasedAuthority")
+Qa::Authorities::Local.register_subauthority("languages", "Qa::Authorities::Local::TableBasedAuthority")
+Qa::Authorities::Local.register_subauthority("genres", "Qa::Authorities::Local::TableBasedAuthority")

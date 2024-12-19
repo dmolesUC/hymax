@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'faraday/multipart'
+
+require "faraday/multipart"
 
 # require "shrine/storage/s3"
 # require "valkyrie/storage/shrine"
@@ -40,7 +41,7 @@ Valkyrie::MetadataAdapter.register(
 #   ), :fedora_metadata
 # )
 
-Valkyrie.config.metadata_adapter = ENV.fetch('VALKYRIE_METADATA_ADAPTER') { :pg_metadata }.to_sym
+Valkyrie.config.metadata_adapter = ENV.fetch("VALKYRIE_METADATA_ADAPTER") { :pg_metadata }.to_sym
 
 # shrine_s3_options = {
 #   bucket: ENV.fetch("REPOSITORY_S3_BUCKET") { "nurax_pg#{Rails.env}" },
@@ -74,29 +75,29 @@ Valkyrie.config.metadata_adapter = ENV.fetch('VALKYRIE_METADATA_ADAPTER') { :pg_
 
 Valkyrie::StorageAdapter.register(
   Valkyrie::Storage::VersionedDisk.new(base_path: Rails.root.join("storage", "files"),
-                                       file_mover: FileUtils.method(:cp)),
+    file_mover: FileUtils.method(:cp)),
   :versioned_disk_storage
 )
 
-Valkyrie.config.storage_adapter  = ENV.fetch('VALKYRIE_STORAGE_ADAPTER') { :versioned_disk_storage }.to_sym
+Valkyrie.config.storage_adapter = ENV.fetch("VALKYRIE_STORAGE_ADAPTER") { :versioned_disk_storage }.to_sym
 
 Valkyrie.config.indexing_adapter = :solr_index
 
 custom_queries = [Hyrax::CustomQueries::Navigators::CollectionMembers,
-                  Hyrax::CustomQueries::Navigators::ChildCollectionsNavigator,
-                  Hyrax::CustomQueries::Navigators::ParentCollectionsNavigator,
-                  Hyrax::CustomQueries::Navigators::ChildFileSetsNavigator,
-                  Hyrax::CustomQueries::Navigators::ChildWorksNavigator,
-                  Hyrax::CustomQueries::Navigators::ParentWorkNavigator,
-                  Hyrax::CustomQueries::Navigators::FindFiles,
-                  Hyrax::CustomQueries::FindAccessControl,
-                  Hyrax::CustomQueries::FindCollectionsByType,
-                  Hyrax::CustomQueries::FindFileMetadata,
-                  Hyrax::CustomQueries::FindIdsByModel,
-                  Hyrax::CustomQueries::FindManyByAlternateIds,
-                  Hyrax::CustomQueries::FindModelsByAccess,
-                  Hyrax::CustomQueries::FindCountBy,
-                  Hyrax::CustomQueries::FindByDateRange]
+  Hyrax::CustomQueries::Navigators::ChildCollectionsNavigator,
+  Hyrax::CustomQueries::Navigators::ParentCollectionsNavigator,
+  Hyrax::CustomQueries::Navigators::ChildFileSetsNavigator,
+  Hyrax::CustomQueries::Navigators::ChildWorksNavigator,
+  Hyrax::CustomQueries::Navigators::ParentWorkNavigator,
+  Hyrax::CustomQueries::Navigators::FindFiles,
+  Hyrax::CustomQueries::FindAccessControl,
+  Hyrax::CustomQueries::FindCollectionsByType,
+  Hyrax::CustomQueries::FindFileMetadata,
+  Hyrax::CustomQueries::FindIdsByModel,
+  Hyrax::CustomQueries::FindManyByAlternateIds,
+  Hyrax::CustomQueries::FindModelsByAccess,
+  Hyrax::CustomQueries::FindCountBy,
+  Hyrax::CustomQueries::FindByDateRange]
 custom_queries.each do |handler|
   Hyrax.query_service.custom_queries.register_query_handler(handler)
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.reloader.to_prepare do
   Riiif::Image.info_service = lambda do |id, _file|
     # id will look like a path to a pcdm:file
@@ -7,9 +8,9 @@ Rails.application.reloader.to_prepare do
 
     fs_id = id.sub(/\A([^\/]*)\/.*/, '\1')
     resp = Hyrax::SolrService.get("id:#{fs_id}")
-    doc = resp['response']['docs'].first
+    doc = resp["response"]["docs"].first
     raise "Unable to find solr document with id:#{fs_id}" unless doc
-    { height: doc['height_is'], width: doc['width_is'], format: doc['mime_type_ssi'], channels: doc['alpha_channels_ssi'] }
+    {height: doc["height_is"], width: doc["width_is"], format: doc["mime_type_ssi"], channels: doc["alpha_channels_ssi"]}
   end
 
   if Hyrax.config.use_valkyrie?
@@ -26,8 +27,8 @@ Rails.application.reloader.to_prepare do
 
   Riiif::Image.authorization_service = Hyrax::IiifAuthorizationService
 
-  Riiif.not_found_image = Rails.root.join('app', 'assets', 'images', 'us_404.svg')
-  Riiif.unauthorized_image = Rails.root.join('app', 'assets', 'images', 'us_404.svg')
+  Riiif.not_found_image = Rails.root.join("app", "assets", "images", "us_404.svg")
+  Riiif.unauthorized_image = Rails.root.join("app", "assets", "images", "us_404.svg")
 
   Riiif::Engine.config.cache_duration = 1.month
 end
@@ -88,8 +89,8 @@ module Hyrax
 
     def build_path(id, force: false)
       Riiif::Image.cache.fetch("riiif:" + Digest::MD5.hexdigest("path:#{id}"),
-                               expires_in: Riiif::Image.expires_in,
-                               force: force) do
+        expires_in: Riiif::Image.expires_in,
+        force: force) do
         load_file(id)
       end
     end
