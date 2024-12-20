@@ -19,5 +19,9 @@ module Hymax
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    configure do
+      config.middleware.delete ActiveFedora::LdpCache
+    end
   end
 end

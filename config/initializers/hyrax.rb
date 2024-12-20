@@ -287,7 +287,7 @@ Hyrax.config do |config|
   # When your application is ready to use the valkyrie index instead of the one
   # maintained by active fedora, you will need to set this to true. You will
   # also need to update your Blacklight configuration.
-  config.query_index_from_valkyrie = true
+  config.query_index_from_valkyrie = false
 
   ## Configure index adapter for Valkyrie::Resources to use solr readonly indexer
   config.index_adapter = :solr_index
@@ -342,3 +342,5 @@ Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
 Qa::Authorities::Local.register_subauthority("subjects", "Qa::Authorities::Local::TableBasedAuthority")
 Qa::Authorities::Local.register_subauthority("languages", "Qa::Authorities::Local::TableBasedAuthority")
 Qa::Authorities::Local.register_subauthority("genres", "Qa::Authorities::Local::TableBasedAuthority")
+
+ActiveFedora.init(solr_config_path: Rails.root.join('config', 'solr.yml'))
