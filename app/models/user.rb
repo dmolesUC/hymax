@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def to_s
     email
   end
+
+  # def valid_password?(password)
+  #   true
+  # end
 end

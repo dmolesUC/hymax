@@ -2,12 +2,12 @@ development:
   archivist:
     - archivist1@example.test
   admin:
-    - dev@test.internal
+    - dev@example.test
 test:
   archivist:
     - archivist1@example.test
   admin:
-    - dev@test.internal
+    - dev@example.test
 
 production:
   # Add roles for users here.
