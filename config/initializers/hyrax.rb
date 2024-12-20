@@ -343,4 +343,8 @@ Qa::Authorities::Local.register_subauthority("subjects", "Qa::Authorities::Local
 Qa::Authorities::Local.register_subauthority("languages", "Qa::Authorities::Local::TableBasedAuthority")
 Qa::Authorities::Local.register_subauthority("genres", "Qa::Authorities::Local::TableBasedAuthority")
 
-ActiveFedora.init(solr_config_path: Rails.root.join('config', 'solr.yml'))
+ActiveFedora.init(solr_config_path: Rails.root.join("config", "solr.yml"))
+# set bulkrax default work type to first curation_concern if it isn't already set
+if Bulkrax.default_work_type.blank?
+  Bulkrax.default_work_type = Hyrax.config.curation_concerns.first.to_s
+end

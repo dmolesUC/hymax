@@ -73,3 +73,6 @@ group :development, :test do
   gem "dotenv-rails", "~> 2.8"
   gem "standard"
 end
+
+gem "bulkrax"
+gem "irb"
