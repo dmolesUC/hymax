@@ -1,24 +1,30 @@
-# README
+# hymax
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A minimal Hyrax/Valkyrie app for scalability testing.
 
-Things you may want to cover:
+## Development
 
-* Ruby version
+Hymax is set up for development running the Rails application locally
+and ancillary services (solr, postgres, redis, fits) via
+[Docker](https://docker.io/), following the pattern set by the
+[default Hyrax-based app](https://github.com/samvera/hyrax/blob/main/documentation/developing-your-hyrax-based-app.md#creating-a-hyrax-based-app).
 
-* System dependencies
+Unlike the default app, however, it uses plain `docker compose` rather
+than [Lando](https://lando.dev/).
 
-* Configuration
+### Getting started
 
-* Database creation
+In the `hymax` root directory:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. bring up the ancillary services stack:
+   ```none
+   docker compose up --detach
+   ```
+2. initialize the development database:
+   ```none
+   rails db:create db:migrate db:seed
+   ```
+3. initialize the test database:
+   ```none
+   RAILS_ENV=test rails db:create db:migrate db:seed
+   ```
