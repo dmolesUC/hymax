@@ -28,3 +28,11 @@ In the `hymax` root directory:
    ```none
    RAILS_ENV=test rails db:create db:migrate db:seed
    ```
+4. start the server:
+   ```none
+   rails s
+   ```
+5. log in
+   - click the "Login" link in the upper right corner
+     - the default admin username and password should be pre-filled
+     - click "Log in"
