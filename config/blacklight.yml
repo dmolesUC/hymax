@@ -1,6 +1,6 @@
 development:
   adapter: solr
-  url: <%= ENV['SOLR_TEST_URL'] || raise("SOLR_TEST_URL not set") %>
+  url: <%= ENV['SOLR_DEV_URL'] || raise("SOLR_DEV_URL not set") %>
 test: &test
   adapter: solr
   url: <%= ENV['SOLR_TEST_URL'] || raise("SOLR_TEST_URL not set") %>
