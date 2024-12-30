@@ -11,9 +11,9 @@ Bulkrax.setup do |config|
   # config.default_work_type = "MyWork"
 
   # Factory Class to use when generating and saving objects
-  config.object_factory = Bulkrax::ObjectFactory
+  # config.object_factory = Bulkrax::ObjectFactory
   # Use this for a Postgres-backed Valkyrized Hyrax
-  # config.object_factory = Bulkrax::ValkyrieObjectFactory
+  config.object_factory = Bulkrax::ValkyrieObjectFactory
 
   # Path to store pending imports
   # config.import_path = 'tmp/imports'
