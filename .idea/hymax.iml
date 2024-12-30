@@ -678,6 +678,7 @@
       <value>file://$MODULE_DIR$/db</value>
     </entry>
     <entry key="db/migrate">
+      <value>file://$USER_HOME$/.rvm/gems/ruby-3.3.5/gems/bulkrax-9.0.0/db/migrate</value>
       <value>file://$MODULE_DIR$/db/migrate</value>
     </entry>
     <entry key="db/seeds.rb">
